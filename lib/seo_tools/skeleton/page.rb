@@ -3,16 +3,23 @@ module SeoTools
     class Page
       include Rails.application.routes.url_helpers
 
-      attr_reader :name, :resource
+      attr_reader :name, :resource, :options
 
-      def initialize(name, options = {})
+      def initialize(name, path: nil, resource: nil, **options)
         @name = name
-        @path = options[:path]
-        @resource = options[:resource]
+        @path = path
+        @resource = resource
+        @options = options
       end
 
       def path
         @path ||= find_route
+      end
+
+      def sitemap_options
+        [:priority, :change_frequency].each_with_object({}) do |param, hash|
+          hash[param] = options[param] if options.key?(param)
+        end
       end
 
       private

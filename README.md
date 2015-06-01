@@ -1,6 +1,10 @@
 # SeoTools::Para
 
-TODO: Write a gem description
+The SEO Tools for Para allows to configure the sitemap and meta tags for your
+Para CMS powered website.
+
+You'll be able to easily define a sitemap for your app, and get an admin panel
+for filling out all the pages' meta tags.
 
 ## Installation
 
@@ -12,11 +16,15 @@ gem 'seo_tools-para'
 
 And then execute:
 
-    $ bundle
+```bash
+bundle
+```
 
 Or install it yourself as:
 
-    $ gem install seo_tools-para
+```bash
+gem install seo_tools-para
+```
 
 ## Usage
 

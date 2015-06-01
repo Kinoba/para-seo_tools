@@ -12,6 +12,14 @@ module SeoTools
         @options = options
       end
 
+      def identifier
+        @identifier ||= [name, resource.try(:id)].compact.join(':')
+      end
+
+      def display_name
+        @display_name ||= [name, resource.try(:id)].compact.join(' #').humanize
+      end
+
       def path
         @path ||= find_route
       end

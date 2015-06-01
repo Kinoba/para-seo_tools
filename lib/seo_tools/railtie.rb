@@ -5,6 +5,8 @@ module SeoTools
       Rails.application.reload_routes!
       # Load the skeleton file
       require skeleton_path if File.exists?(skeleton_path)
+      # Build meta tags lists for all pages
+      SeoTools::MetaTags.build_from(SeoTools::Skeleton.site)
     end
 
     rake_tasks do

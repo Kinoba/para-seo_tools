@@ -1,12 +1,16 @@
 module SeoTools
-  class Railtie < Rails::Railtie
+  class Engine < Rails::Engine
     config.after_initialize do
       # Ensure routes are loaded to allow skeleton to call routes name helpers
       Rails.application.reload_routes!
       # Load the skeleton file
       require skeleton_path if File.exists?(skeleton_path)
-      # Build meta tags lists for all pages
-      SeoTools::MetaTags.build_from(SeoTools::Skeleton.site)
+    end
+
+    initializer 'Include controller mixin' do
+      ActiveSupport.on_load(:action_controller) do
+        include SeoTools::Controller
+      end
     end
 
     rake_tasks do

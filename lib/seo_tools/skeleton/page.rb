@@ -24,6 +24,17 @@ module SeoTools
         @path ||= find_route
       end
 
+      def model
+        @model ||= ::SeoTools::Page.where(identifier: identifier).first_or_initialize do |page|
+          page.path = path
+          page.meta_tags = meta_tags
+        end
+      end
+
+      def meta_tags
+        @meta_tags ||= SeoTools::MetaTags.new(self).build
+      end
+
       def sitemap_options
         [:priority, :change_frequency].each_with_object({}) do |param, hash|
           hash[param] = options[param] if options.key?(param)

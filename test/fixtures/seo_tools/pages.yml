@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  identifier: MyString
+  path: MyString
+  meta_tags_list_id: 
+
+two:
+  identifier: MyString
+  path: MyString
+  meta_tags_list_id: 

@@ -16,6 +16,10 @@ module SeoTools
   mattr_accessor :host
   @@host = ENV['APP_DOMAIN']
 
+  def self.configure
+    block_given? ? yield(self) : self
+  end
+
   def self.table_name_prefix
     'seo_tools_'
   end

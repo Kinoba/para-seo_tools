@@ -24,5 +24,3 @@ module SeoTools
     'seo_tools_'
   end
 end
-
-require 'seo_tools/skeleton_component'

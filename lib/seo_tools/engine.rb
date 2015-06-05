@@ -1,5 +1,7 @@
 module SeoTools
   class Engine < Rails::Engine
+    config.autoload_paths << File.expand_path('../../../app/components')
+
     config.after_initialize do
       # Ensure routes are loaded to allow skeleton to call routes name helpers
       Rails.application.reload_routes!

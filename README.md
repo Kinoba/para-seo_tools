@@ -111,7 +111,22 @@ Sitemap generation is accomplished through the use of the
 [rails-sitemap](https://github.com/viseztrance/rails-sitemap) gem,
 with a custom task to integrate easily with `seo_tools-para`.
 
-This can be done with the dedicated rake task :
+You'll first need to configure your application's host name.
+This can be defined in the generated initializer or in an environment variable.
+
+In the `config/initializers/seo_tools.rb` initializer :
+
+```ruby
+config.host = "www.mydomain.com"
+```
+
+Or with the `APP_DOMAIN` environment variable.
+
+```bash
+APP_DOMAIN="www.mydomain.com"
+```
+
+Generating the sitemap can be done with the dedicated rake task :
 
 ```bash
 rake seo_tools:sitemap:generate

@@ -1,7 +1,6 @@
 = para_form_for(resource) do |form|
   = form.fieldset do
-    = form.input :identifier
-    = form.input :path
+    = form.input :path, disabled: true
 
     = form.input :meta_tags, as: :nested_one
 

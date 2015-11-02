@@ -25,9 +25,11 @@ module SeoTools
       end
 
       def model
-        @model ||= ::SeoTools::Page.where(identifier: identifier).first_or_initialize do |page|
+        @model ||= ::SeoTools::Page.where(identifier: identifier).first_or_initialize.tap do |page|
+          # Override path (i.e.: slug changed)
           page.path = path
-          page.meta_tags = meta_tags
+          # Do not override meta tags if already present
+          page.meta_tags ||= meta_tags
         end
       end
 

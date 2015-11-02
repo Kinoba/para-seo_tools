@@ -8,6 +8,7 @@ module SeoTools
     mattr_accessor :site
 
     def self.draw(&block)
+      return if migrating?
       return unless ActiveRecord::Base.connection.table_exists?(SeoTools::Page.table_name)
 
       self.site = Skeleton::Site.new
@@ -21,6 +22,10 @@ module SeoTools
 
       # Delete pages not in skeleton
       destroy_deleted_pages!
+    end
+
+    def self.migrating?
+      File.basename($0) == "rake" && ARGV.include?("db:migrate")
     end
 
     def self.destroy_deleted_pages!

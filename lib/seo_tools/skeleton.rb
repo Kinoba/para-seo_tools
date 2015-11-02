@@ -25,7 +25,7 @@ module SeoTools
     end
 
     def self.migrating?
-      File.basename($0) == "rake" && ARGV.include?("db:migrate")
+      ActiveRecord::Migrator.needs_migration?(ActiveRecord::Base.connection)
     end
 
     def self.destroy_deleted_pages!

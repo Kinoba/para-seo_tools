@@ -25,7 +25,7 @@ module SeoTools
     end
 
     def self.migrating?
-      ActiveRecord::Migrator.needs_migration?(ActiveRecord::Base.connection)
+      ActiveRecord::Migrator.needs_migration?
     end
 
     def self.destroy_deleted_pages!

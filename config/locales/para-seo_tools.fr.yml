@@ -11,5 +11,5 @@ fr:
         identifier: "Identifiant"
         meta_title: "Titre"
         meta_description: "Description"
-        keywords: "Mots-clés de la page"
+        meta_keywords: "Mots-clés de la page"
 

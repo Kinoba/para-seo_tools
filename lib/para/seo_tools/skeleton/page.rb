@@ -26,16 +26,16 @@ module Para
         end
 
         def model
-          @model ||= ::Para::SeoTools::Page.where(
-            identifier: identifier
-          ).first_or_initialize do |page|
+          @model ||= ::Para::SeoTools::Page.where(identifier: identifier).first_or_initialize.tap do |page|
+            # Override path (i.e.: slug changed)
             page.path = path
-            page.meta_tags = meta_tags
+            # Do not override meta tags if already present
+            page.meta_tags ||= meta_tags
           end
         end
 
         def meta_tags
-          @meta_tags ||= Para::SeoTools::MetaTags.new(self).build
+          @meta_tags ||= ::Para::SeoTools::MetaTags.new(self).build
         end
 
         def sitemap_options

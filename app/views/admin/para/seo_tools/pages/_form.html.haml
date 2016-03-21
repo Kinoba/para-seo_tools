@@ -1,6 +1,6 @@
 = para_form_for(resource) do |form|
   = form.fieldset do
-    = form.input :path
+    = form.input :path, disabled: true
 
     = form.simple_fields_for :meta_tags do |meta_tags_fields|
       = meta_tags_fields.input :meta_title

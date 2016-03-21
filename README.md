@@ -1,4 +1,4 @@
-# SeoTools::Para
+# Para::SeoTools
 
 The SEO Tools for Para allows to configure the sitemap and meta tags for your
 Para CMS powered website.

@@ -2,7 +2,7 @@ namespace :seo_tools do
   namespace :sitemap do
     desc "Generates a new sitemap."
     task generate: :environment do
-      SeoTools::Sitemap.build
+      Para::SeoTools::Sitemap.build
       root = ::Sitemap.configuration.save_path || ENV["LOCATION"] || Rails.public_path
       path = File.join(root, "sitemap.xml")
       ::Sitemap::Generator.instance.build!

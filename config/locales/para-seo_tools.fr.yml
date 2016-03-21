@@ -1,0 +1,15 @@
+fr:
+  activerecord:
+    attributes:
+      para/seo_tools/page:
+        path: "URL de la page"
+        identifier: "Identifiant de la page"
+        meta_title: "Titre"
+        meta_description: "Description"
+      meta_tags/list:
+        name: "Nom"
+        identifier: "Identifiant"
+        meta_title: "Titre"
+        meta_description: "Description"
+        keywords: "Mots-clés de la page"
+

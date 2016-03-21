@@ -2,12 +2,7 @@ module Para
   module SeoTools
     class Engine < Rails::Engine
       config.after_initialize do
-        # Ensure routes are loaded to allow skeleton to call routes name helpers
-        Rails.application.reload_routes!
-        # Skeleton file path
-        skeleton_path = File.expand_path('config/skeleton.rb', Rails.root)
-        # Load the skeleton file
-        require skeleton_path if File.exists?(skeleton_path)
+        Para::SeoTools::Skeleton.load
       end
 
       initializer 'Include controller mixin' do

@@ -1,4 +1,13 @@
-Para::SeoTools::Skeleton.draw do
+# Use `lazy: true` to avoid generating the pages skeleton on server run
+#
+# You'll then have to run `rake seo_tools:skeleton:build` to refresh it or use
+# the `Para::SeoTools::Skeleton::Worker.perform` method in some worker to
+# refresh it periodically
+#
+# Note that you also have to always refresh the sitemap manually with the
+# following task : `rake seo_tools:sitemap:generate`
+#
+Para::SeoTools::Skeleton.draw(lazy: false) do
   # Define your website SEO targetted structure here.
   # Pages are defined with the `page` method, and allows for some options.
   #

@@ -27,17 +27,25 @@ module Para
         return if migrating?
         return unless ActiveRecord::Base.connection.table_exists?(Para::SeoTools::Page.table_name)
 
+        puts "   * Building app skeleton pages ..."
+
         self.site = Skeleton::Site.new
         # Evaluate the configuration block
         site.instance_exec(&config)
 
         # Save all the pages to database
-        site.pages.each do |page|
-          page.model.save!
-        end
+        ActiveRecord::Base.transaction do
+          puts "   * Saving generated pages ..."
 
-        # Delete pages not in skeleton
-        destroy_deleted_pages!
+          site.pages.each do |page|
+            page.model.save!
+          end
+
+          puts "   * Destroying old pages ..."
+
+          # Delete pages not in skeleton
+          destroy_deleted_pages!
+        end
       end
 
       def self.migrating?

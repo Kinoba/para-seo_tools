@@ -1,10 +1,17 @@
-= resources_table(model: model, component: component) do |table|
+= resources_table(model: model, component: component, actions: false) do |table|
   = table.header do
     = table.header_for(:path)
     = table.header_for(:meta_title)
     = table.header_for(:meta_description)
+    %th
 
   = table.rows(resources) do |resource|
     = table.data_for(resource, :path)
     = table.data_for(resource.meta_tags.try(:meta_title))
     = table.data_for(resource.meta_tags.try(:meta_description))
+
+    %td
+      .pull-right.btn-group
+        = table.edit_button(resource)
+        = link_to resource.path, target: '_blank', class: 'btn btn-default hint--left', data: { hint: t('para.seo_tools.pages.see_in_app') } do
+          = fa_icon 'eye'

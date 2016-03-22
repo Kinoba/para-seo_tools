@@ -1,4 +1,9 @@
 fr:
+  para:
+    seo_tools:
+      pages:
+        see_in_app: "Voir la page"
+
   activerecord:
     attributes:
       para/seo_tools/page:

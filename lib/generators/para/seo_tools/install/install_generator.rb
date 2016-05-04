@@ -12,7 +12,7 @@ module Para
       end
 
       def copy_and_run_migrations
-        rake 'seo_tools_engine:install:migrations'
+        rake 'para_seo_tools_engine:install:migrations'
         rake 'db:migrate'
       end
 

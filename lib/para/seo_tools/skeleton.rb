@@ -65,7 +65,7 @@ module Para
       # Log messages when you're not in rails
       #
       def log(message)
-        puts message unless $0.end_with?('rails')
+        Rails.logger.info(message) unless $0.end_with?('rails')
       end
     end
   end

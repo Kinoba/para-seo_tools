@@ -27,7 +27,7 @@ module Para
         return if migrating?
         return unless ActiveRecord::Base.connection.table_exists?(Para::SeoTools::Page.table_name)
 
-        puts "   * Building app skeleton pages ..."
+        log "   * Building app skeleton pages ..."
 
         self.site = Skeleton::Site.new
         # Evaluate the configuration block
@@ -35,13 +35,13 @@ module Para
 
         # Save all the pages to database
         ActiveRecord::Base.transaction do
-          puts "   * Saving generated pages ..."
+          log "   * Saving generated pages ..."
 
           site.pages.each do |page|
             page.model.save!
           end
 
-          puts "   * Destroying old pages ..."
+          log "   * Destroying old pages ..."
 
           # Delete pages not in skeleton
           destroy_deleted_pages!
@@ -60,6 +60,12 @@ module Para
           Rails.logger.info("Destroying #{ count } removed pages from Skeleton")
           pages.destroy_all
         end
+      end
+
+      # Log messages when you're not in rails
+      #
+      def log(message)
+        puts message unless $0.end_with?('rails')
       end
     end
   end

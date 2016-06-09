@@ -1,1 +1,0 @@
-require 'seo_tools'

@@ -1,14 +1,14 @@
 = resources_table(model: model, component: component, actions: false) do |table|
   = table.header do
     = table.header_for(:path)
-    = table.header_for(:meta_title)
-    = table.header_for(:meta_description)
+    = table.header_for(:title)
+    = table.header_for(:description)
     %th
 
   = table.rows(resources) do |resource|
     = table.data_for(resource, :path)
-    = table.data_for(resource.meta_tags.try(:meta_title))
-    = table.data_for(resource.meta_tags.try(:meta_description))
+    = table.data_for(resource, :title)
+    = table.data_for(resource, :description)
 
     %td
       .pull-right.btn-group

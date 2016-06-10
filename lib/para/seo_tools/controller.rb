@@ -4,15 +4,15 @@ module Para
       extend ActiveSupport::Concern
 
       included do
-        before_action :fetch_meta_tags_for_current_path
+        before_action :fetch_meta_tags_page
       end
 
       private
 
-      def fetch_meta_tags_for_current_path
-        if (meta_tags = Para::SeoTools::Page.meta_tags_for(request.path))
-          set_meta_tags_from_list(meta_tags)
-        end
+      def fetch_meta_tags_page
+        # if (page = Para::SeoTools::Page.find_by_path(request.path))
+        #   set_meta_tags_from_list(meta_tags)
+        # end
       end
     end
   end

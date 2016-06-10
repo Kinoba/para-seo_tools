@@ -6,7 +6,6 @@ module Para
 
         def page(name, options = {} , &block)
           page = Skeleton::Page.new(name, options)
-          page.instance_exec(&block) if block
           pages << page
         end
 

@@ -57,14 +57,14 @@ module Para
         pages = Para::SeoTools::Page.where.not(identifier: identifiers)
 
         if (count = pages.count) > 0
-          Rails.logger.info("Destroying #{ count } removed pages from Skeleton")
+          log "Destroying #{ count } removed pages from Skeleton"
           pages.destroy_all
         end
       end
 
       # Log messages when you're not in rails
       #
-      def log(message)
+      def self.log(message)
         Rails.logger.info(message) unless $0.end_with?('rails')
       end
     end

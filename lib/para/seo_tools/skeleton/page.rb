@@ -30,12 +30,8 @@ module Para
             # Override path (i.e.: slug changed)
             page.path = path
             # Do not override meta tags if already present
-            page.meta_tags ||= meta_tags
+            page.defaults = options[:defaults] || {}
           end
-        end
-
-        def meta_tags
-          @meta_tags ||= ::Para::SeoTools::MetaTags.new(self).build
         end
 
         def sitemap_options

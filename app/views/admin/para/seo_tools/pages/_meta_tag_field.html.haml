@@ -1,0 +1,5 @@
+.meta-tag-field
+  = form.input name, (defined?(options) ? *Array(options) : {})
+
+  - if !form.object.send(name) && (default = form.object.meta_tag(name))
+    %p.help-block= t('para.seo_tools.pages.default_meta_tag_value', value: default)

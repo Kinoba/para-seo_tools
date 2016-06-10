@@ -7,7 +7,7 @@ module Para
       validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ }
 
       def meta_tag(name)
-        process(name, send(name) || defaults[name.to_s])
+        process(name, send(name)).presence || default(name)
       end
 
       def defaults
@@ -16,6 +16,10 @@ module Para
         else
           self.defaults = {}
         end
+      end
+
+      def default(name)
+        process(name, defaults[name.to_s]) if defaults[name.to_s]
       end
 
       private

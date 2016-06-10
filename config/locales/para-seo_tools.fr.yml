@@ -3,7 +3,7 @@ fr:
     seo_tools:
       pages:
         see_in_app: "Voir la page"
-        default_meta_tag_value: "Valeur par défaut : %{value}"
+        default_meta_tag_value: "Valeur par défaut : <b>%{value}</b>"
         additional_meta_tags: "Meta-données avancées"
 
   activerecord:

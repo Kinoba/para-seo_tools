@@ -4,18 +4,16 @@ fr:
       pages:
         see_in_app: "Voir la page"
         default_meta_tag_value: "Valeur par défaut : %{value}"
+        additional_meta_tags: "Meta-données avancées"
 
   activerecord:
     attributes:
       para/seo_tools/page:
         path: "URL de la page"
         identifier: "Identifiant de la page"
-        meta_title: "Titre"
-        meta_description: "Description"
-      meta_tags/list:
-        name: "Nom"
-        identifier: "Identifiant"
-        meta_title: "Titre"
-        meta_description: "Description"
-        meta_keywords: "Mots-clés de la page"
+        title: "Titre"
+        description: "Description"
+        keywords: "Mots-clés de la page"
+        image: "Image pour le partage sur les réseaux sociaux"
+        canonical: "URL canonique"
 

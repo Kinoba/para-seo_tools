@@ -2,12 +2,12 @@
   = form.fieldset do
     = form.input :path, disabled: true
 
-    = render partial: 'meta_tag_fields', locals: { form: form, name: :title }
-    = render partial: 'meta_tag_fields', locals: { form: form, name: :description }
-    = render partial: 'meta_tag_fields', locals: { form: form, name: :keywords }
+    = meta_tag_input form, :title
+    = meta_tag_input form, :description
+    = meta_tag_input form, :keywords
 
-  = form.fieldset title: :foo do
-    = render partial: 'meta_tag_fields', locals: { form: form, name: :image, input_options: { as: :image } }
-    = render partial: 'meta_tag_fields', locals: { form: form, name: :canonical }
+  = form.fieldset title: t('para.seo_tools.pages.additional_meta_tags') do
+    = meta_tag_input form, :image, as: :image
+    = meta_tag_input form, :canonical
 
   = form.actions

@@ -6,7 +6,7 @@ class AddMetaTagsToSeoToolsPages < ActiveRecord::Migration
       t.text :keywords
       t.attachment :image
       t.text :canonical
-      t.json :defaults
+      t.jsonb :defaults
     end
   end
 end

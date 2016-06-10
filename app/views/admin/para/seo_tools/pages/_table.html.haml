@@ -7,8 +7,8 @@
 
   = table.rows(resources) do |resource|
     = table.data_for(resource, :path)
-    = table.data_for(resource, :title)
-    = table.data_for(resource, :description)
+    = table.data_for(resource.meta_tag(:title))
+    = table.data_for(resource.meta_tag(:description))
 
     %td
       .pull-right.btn-group

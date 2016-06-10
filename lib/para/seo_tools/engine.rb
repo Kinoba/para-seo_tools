@@ -16,6 +16,12 @@ module Para
           load(path)
         end
       end
+
+      initializer "include view helpers" do
+        ActiveSupport.on_load(:action_view) do
+          include Para::SeoTools::ViewHelpers
+        end
+      end
     end
   end
 end

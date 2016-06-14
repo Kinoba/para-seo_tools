@@ -4,13 +4,18 @@ module Para
       class Page
         include Rails.application.routes.url_helpers
 
-        attr_reader :name, :resource, :options
+        attr_reader :name, :resource, :options, :locale
 
         def initialize(name, path: nil, resource: nil, **options)
           @name = name
           @path = path
           @resource = resource
           @options = options
+
+          # Fetch locale on page build to allow calling the `page` skeleton
+          # method inside a `I18n.with_locale` block
+          #
+          @locale = options.fetch(:locale, I18n.locale)
         end
 
         def identifier
@@ -26,9 +31,10 @@ module Para
         end
 
         def model
-          @model ||= ::Para::SeoTools::Page.where(identifier: identifier).first_or_initialize.tap do |page|
+          @model ||= self.class.model_for(identifier).tap do |page|
             # Override path (i.e.: slug changed)
-            page.path = path
+            page.path = path if path.to_s != page.path
+            page.locale = locale
             # Do not override meta tags if already present
             page.defaults = options[:defaults] || {}
           end
@@ -47,6 +53,16 @@ module Para
         def find_route
           if respond_to?(:"#{ name }_path")
             send(:"#{ name }_path", resource)
+          end
+        end
+
+        def self.model_for(identifier)
+          models[identifier] ||= ::Para::SeoTools::Page.new(identifier: identifier)
+        end
+
+        def self.models
+          @models ||= Para::SeoTools::Page.all.each_with_object({}) do |page, hash|
+            hash[page.identifier] = page
           end
         end
       end

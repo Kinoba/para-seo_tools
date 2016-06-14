@@ -3,15 +3,18 @@
     = table.header_for(:path)
     = table.header_for(:title)
     = table.header_for(:description)
+    = table.header_for(:locale) if @available_locales.length > 1
     %th
 
   = table.rows(resources) do |resource|
     = table.data_for(resource, :path)
     = table.data_for(resource.meta_tag(:title))
     = table.data_for(resource.meta_tag(:description))
+    = table.data_for(resource, :locale) if @available_locales.length > 1
 
     %td
       .pull-right.btn-group
         = table.edit_button(resource)
+
         = link_to resource.path, target: '_blank', class: 'btn btn-default hint--left', data: { hint: t('para.seo_tools.pages.see_in_app') } do
           = fa_icon 'eye'

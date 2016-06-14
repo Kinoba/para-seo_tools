@@ -22,6 +22,24 @@ module Para
         process(name, defaults[name.to_s]) if defaults[name.to_s]
       end
 
+      ransacker :title do |parent|
+        default_title = Arel::Nodes::InfixOperation.new('->>', parent.table[:defaults], Arel::Nodes.build_quoted('title'))
+        expr = Arel::Nodes::NamedFunction.new('COALESCE', [parent.table[:title], default_title])
+
+        # Conversion to Arel::Nodes::SqlLiteral is required for sorting to work,
+        # since the Arel::Nodes::NamedFunction doesn't include Arel ordering
+        # methods, and Ransack uses them
+        #
+        Arel::Nodes::SqlLiteral.new(expr.to_sql)
+      end
+
+      ransacker :description do |parent|
+        default_description = Arel::Nodes::InfixOperation.new('->>', parent.table[:defaults], Arel::Nodes.build_quoted('description'))
+        expr = Arel::Nodes::NamedFunction.new('COALESCE',[parent.table[:description], default_description])
+
+        Arel::Nodes::SqlLiteral.new(expr.to_sql)
+      end
+
       private
 
       def process(name, value)

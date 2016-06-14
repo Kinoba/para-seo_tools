@@ -7,7 +7,14 @@ module Para
       autoload :Page
       autoload :Worker
 
-      mattr_accessor :site, :config
+      mattr_accessor :site, :config, :enable_logging
+
+      def self.with_logging(&block)
+        self.enable_logging = true
+        block.call
+      ensure
+        self.enable_logging = false
+      end
 
       def self.load
         # Ensure routes are loaded to allow skeleton to call routes name helpers
@@ -65,7 +72,7 @@ module Para
       # Log messages when you're not in rails
       #
       def self.log(message)
-        Rails.logger.info(message) unless $0.end_with?('rails')
+        Rails.logger.info(message) if enable_logging || !$0.end_with?('rails')
       end
     end
   end

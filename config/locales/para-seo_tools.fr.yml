@@ -5,6 +5,8 @@ fr:
         see_in_app: "Voir la page"
         default_meta_tag_value: "Valeur par défaut : <b>%{value}</b>"
         additional_meta_tags: "Meta-données avancées"
+        refresh_skeleton: "Mettre à jour"
+        choose_locale: "Choisissez une langue"
 
   activerecord:
     attributes:
@@ -16,4 +18,5 @@ fr:
         keywords: "Mots-clés de la page"
         image: "Image pour le partage sur les réseaux sociaux"
         canonical: "URL canonique"
+        locale: "Langue"
 

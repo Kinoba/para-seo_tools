@@ -1,0 +1,5 @@
+%ul.panel-controls
+  %li
+    = link_to @component.relation_path(action: :refresh, return_to: request.fullpath), class: 'btn btn-default' do
+      = fa_icon 'refresh'
+      = t('para.seo_tools.pages.refresh_skeleton')

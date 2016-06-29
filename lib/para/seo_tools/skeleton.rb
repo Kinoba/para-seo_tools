@@ -36,19 +36,13 @@ module Para
 
         log "   * Building app skeleton pages ..."
 
-        self.site = Skeleton::Site.new
+        self.site = Skeleton::Site.new(enable_logging: enable_logging)
         # Evaluate the configuration block
         site.instance_exec(&config)
 
-        # Save all the pages to database
+        # Save remaining pages and remove old pages
         ActiveRecord::Base.transaction do
-          log "   * Saving generated pages ..."
-
-          site.pages.each do |page|
-            page.model.save!
-          end
-
-          log "   * Destroying old pages ..."
+          site.save
 
           # Delete pages not in skeleton
           destroy_deleted_pages!
@@ -60,13 +54,9 @@ module Para
       end
 
       def self.destroy_deleted_pages!
-        identifiers = site.pages.map(&:identifier)
-        pages = Para::SeoTools::Page.where.not(identifier: identifiers)
-
-        if (count = pages.count) > 0
-          log "Destroying #{ count } removed pages from Skeleton"
-          pages.destroy_all
-        end
+        pages = Para::SeoTools::Page.where.not(identifier: site.saved_pages)
+        log "   * Destroying old pages ..."
+        pages.destroy_all
       end
 
       # Log messages when you're not in rails

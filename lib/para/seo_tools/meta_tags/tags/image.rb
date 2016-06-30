@@ -13,8 +13,11 @@ module Para
             if url.start_with?('http://')
               url
             else
-              request = RequestStore.store[:'para.seo_tools.request']
-              URI.join(request.url, url).to_s
+              if (request = RequestStore.store[:'para.seo_tools.request'])
+                URI.join(request.url, url).to_s
+              else
+                url
+              end
             end
           end
 

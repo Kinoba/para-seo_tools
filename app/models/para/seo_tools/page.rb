@@ -7,7 +7,11 @@ module Para
       validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ }
 
       def meta_tag(name)
-        process(name, send(name)).presence || default(name)
+        if (value = send(name).presence) && (meta = process(name, value)).present?
+          return meta
+        end
+
+        default(name)
       end
 
       def defaults

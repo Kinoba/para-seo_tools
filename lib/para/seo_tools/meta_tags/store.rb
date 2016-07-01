@@ -34,19 +34,13 @@ module Para
         def fetch_value_for(tag_name)
           ivar_name = :"@#{ tag_name }"
 
-          puts " ** fetch_value_for : #{ tag_name }"
-
           if (value = instance_variable_get(ivar_name)).present?
-            puts " ** ivar_name present : #{ ivar_name } -- #{ value }"
             value
           else
-            puts " ** process : #{ MetaTags::Tags[tag_name].inspect } -- #{ value }"
-
             value = if (processor = MetaTags::Tags[tag_name])
               processor.new(controller).value
             end
 
-            puts " ** value processed : #{ value } -- default ? : #{ (defaults[tag_name] unless value.present?).inspect }"
             value = defaults[tag_name] unless value.present?
 
             instance_variable_set(ivar_name, value) if value

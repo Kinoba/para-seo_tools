@@ -44,7 +44,11 @@ module Para
         end
 
         def max_pages_before_save
-          @max_pages_before_save ||= ENV['SEO_TOOLS_MAX_PAGES_BEFORE_SAVE'] || 100
+          @max_pages_before_save ||= if (param = ENV['SEO_TOOLS_MAX_PAGES_BEFORE_SAVE']).present?
+            para.to_i
+          else
+            500
+          end
         end
       end
     end

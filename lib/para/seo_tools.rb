@@ -17,7 +17,7 @@ module Para
     autoload :MetaTaggableMacro
     autoload :ViewHelpers
 
-    mattr_accessor :host
+    mattr_writer :host
     @@host = ENV['APP_DOMAIN']
 
     mattr_accessor :title_methods
@@ -38,6 +38,10 @@ module Para
 
     def self.table_name_prefix
       'seo_tools_'
+    end
+
+    def self.host
+      @@host.presence && @@host.match(/[^:]+/)[0]
     end
   end
 end

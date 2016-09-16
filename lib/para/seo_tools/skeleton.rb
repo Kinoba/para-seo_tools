@@ -54,9 +54,9 @@ module Para
       end
 
       def self.destroy_deleted_pages!
-        pages = Para::SeoTools::Page.where.not(identifier: site.saved_pages)
+        pages = Para::SeoTools::Page.where.not(id: site.saved_pages_ids)
         log "   * Destroying old pages ..."
-        pages.destroy_all
+        pages.delete_all
       end
 
       # Log messages when you're not in rails

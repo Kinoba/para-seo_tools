@@ -26,15 +26,15 @@ module Para
           ActiveRecord::Base.transaction do
             pages.each do |page|
               page.model.save!
-              saved_pages << page.model.identifier
+              saved_pages_ids << page.model.id
             end
           end
 
           pages.clear
         end
 
-        def saved_pages
-          @saved_pages ||= []
+        def saved_pages_ids
+          @saved_pages_ids ||= []
         end
 
         # Log messages when you're not in rails

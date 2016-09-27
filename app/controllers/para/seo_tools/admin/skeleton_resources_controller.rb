@@ -1,6 +1,6 @@
-module Admin
-  module Para
-    module SeoTools
+module Para
+  module SeoTools
+    module Admin
       class SkeletonResourcesController < ::Para::Admin::CrudResourcesController
         def index
           super

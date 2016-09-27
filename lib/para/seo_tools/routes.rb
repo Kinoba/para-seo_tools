@@ -3,7 +3,7 @@ module Para
     class Routes < Para::Plugins::Routes
       def draw
         plugin :seo_tools do
-          crud_component :skeleton, scope: ':model' do
+          crud_component :seo_tools_skeleton, scope: ':model', controller: :skeleton_resources do
             collection do
               get :refresh
             end

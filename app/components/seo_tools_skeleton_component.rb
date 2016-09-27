@@ -4,4 +4,8 @@ class SeoToolsSkeletonComponent < Para::Component::Crud
   def model_type
     '::Para::SeoTools::Page'
   end
+
+  def controller
+    :skeleton_resources
+  end
 end

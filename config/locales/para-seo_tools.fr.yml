@@ -8,6 +8,17 @@ fr:
         refresh_skeleton: "Mettre à jour"
         choose_locale: "Choisissez une langue"
 
+    jobs:
+      para/seo_tools/skeleton/job:
+        progressing: "Le plan du site est actuellement recalculé, merci de patienter quelques instants ..."
+        success: "Le plan du site a bien été mis à jour !"
+
+
+  activemodel:
+    models:
+      para/seo_tools/skeleton/job:
+        one: "Mise à jour du plan du site"
+
   activerecord:
     attributes:
       para/seo_tools/page:

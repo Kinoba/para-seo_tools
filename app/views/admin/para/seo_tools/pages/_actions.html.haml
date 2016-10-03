@@ -1,5 +1,5 @@
 %ul.panel-controls
   %li
-    = link_to @component.relation_path(action: :refresh, return_to: request.fullpath), class: 'btn btn-default' do
+    = link_to run_admin_skeleton_refresh_path, class: 'btn btn-default', remote: true, data: { :'job-tracker-button' => true } do
       = fa_icon 'refresh'
       = t('para.seo_tools.pages.refresh_skeleton')

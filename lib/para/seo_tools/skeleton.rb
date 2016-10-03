@@ -5,7 +5,7 @@ module Para
 
       autoload :Site
       autoload :PageBuilder
-      autoload :Worker
+      autoload :Job
 
       mattr_accessor :site, :config, :options, :enable_logging
 

@@ -9,7 +9,7 @@ module Para
         attr_reader :name, :resource, :locale, :defaults, :config
 
         def initialize(name, path: nil, resource: nil, **options)
-          @name = name
+          @name = Array.wrap(name).join(':')
           @path = path
           @resource = resource
 

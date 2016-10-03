@@ -2,19 +2,9 @@ module Para
   module SeoTools
     class Sitemap
       def self.generate!
-        puts " * GENERATE SITEMAP ..."
-
         build
-
-        puts " * BUILD ..."
-
         ::Sitemap::Generator.instance.build!
-
-        puts " * SAVE ..."
-
         ::Sitemap::Generator.instance.save(path)
-
-        puts " * SAVED !"
       end
 
       def self.path

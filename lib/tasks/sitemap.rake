@@ -5,6 +5,7 @@ namespace :seo_tools do
       Para::SeoTools::Sitemap.build
       root = ::Sitemap.configuration.save_path || ENV["LOCATION"] || Rails.public_path
       path = File.join(root, "sitemap.xml")
+
       ::Sitemap::Generator.instance.build!
       ::Sitemap::Generator.instance.save(path)
     end

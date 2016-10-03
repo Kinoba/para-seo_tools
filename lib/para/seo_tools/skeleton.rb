@@ -4,10 +4,10 @@ module Para
       extend ActiveSupport::Autoload
 
       autoload :Site
-      autoload :Page
+      autoload :PageBuilder
       autoload :Worker
 
-      mattr_accessor :site, :config, :enable_logging
+      mattr_accessor :site, :config, :options, :enable_logging
 
       def self.with_logging(&block)
         self.enable_logging = true
@@ -25,8 +25,9 @@ module Para
         require skeleton_path if File.exists?(skeleton_path)
       end
 
-      def self.draw(lazy: false, &block)
+      def self.draw(lazy: false, **options, &block)
         self.config = block
+        self.options = options
         build unless lazy
       end
 
@@ -36,7 +37,9 @@ module Para
 
         log "   * Building app skeleton pages ..."
 
-        self.site = Skeleton::Site.new(enable_logging: enable_logging)
+        site_options = options.merge(enable_logging: enable_logging)
+        self.site = Skeleton::Site.new(site_options)
+
         # Evaluate the configuration block
         site.instance_exec(&config)
 

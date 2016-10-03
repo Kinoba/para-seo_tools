@@ -12,6 +12,7 @@ module Para
     autoload :Routes
     autoload :Skeleton
     autoload :Sitemap
+    autoload :PageScoping
 
     autoload :MetaTaggable
     autoload :MetaTaggableMacro
@@ -19,6 +20,12 @@ module Para
 
     mattr_writer :host
     @@host = ENV['APP_DOMAIN']
+
+    mattr_accessor :handle_domain
+    @@handle_domain = false
+
+    mattr_accessor :handle_subdomain
+    @@handle_subdomain = false
 
     mattr_accessor :title_methods
     @@title_methods = %w(title name)

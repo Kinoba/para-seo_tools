@@ -3,17 +3,27 @@ module Para
     module Skeleton
       class Site
         include Rails.application.routes.url_helpers
-        attr_reader :enable_logging
+        attr_reader :enable_logging, :default_page_options
 
         def initialize(options = {})
-          @enable_logging = options[:enable_logging]
+          @enable_logging = options.delete(:enable_logging)
+          @default_page_options = options
         end
 
         def page(name, options = {} , &block)
-          Skeleton::Page.new(name, options).tap do |page|
+          options.reverse_merge!(default_page_options)
+
+          Skeleton::PageBuilder.new(name, options).tap do |page|
             pages << page
             save if pages.length == max_pages_before_save
           end
+        end
+
+        def with_params(params = {}, &block)
+          previous_default_page_options = default_page_options
+          @default_page_options = default_page_options.dup.merge(params)
+          block.call
+          @default_page_options = previous_default_page_options
         end
 
         def pages

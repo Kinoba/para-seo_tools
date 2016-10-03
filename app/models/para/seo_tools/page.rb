@@ -3,8 +3,15 @@ module Para
     class Page < ActiveRecord::Base
       META_TAGS = :title, :description, :keywords, :image, :canonical
 
+      store_accessor :config, :scope
+
       has_attached_file :image, styles: { thumb: '200x200#' }
       validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ }
+
+      validate :identifier_uniqueness
+
+      scope :with_subdomain, ->(subdomain) { where("config->>'subdomain' = ?", subdomain) }
+      scope :with_domain, ->(domain) { where("config->>'domain' = ?", domain) }
 
       def meta_tag(name)
         if (value = send(name).presence) && (meta = process(name, value)).present?
@@ -44,6 +51,16 @@ module Para
         Arel::Nodes::SqlLiteral.new(expr.to_sql)
       end
 
+      def scope_attributes
+        scope.each_with_object({}) do |attribute, hash|
+          hash[attribute] = if self.class.column_names.include?(attribute.to_s)
+            send(attribute)
+          else
+            config[attribute.to_s]
+          end
+        end
+      end
+
       private
 
       def process(name, value)
@@ -51,6 +68,23 @@ module Para
           processor.process(value)
         else
           value
+        end
+      end
+
+      def identifier_uniqueness
+        conditions = PageScoping.new(self).uniqueness_scope_conditions
+        conditions = conditions.where.not(id: id) if persisted?
+
+        if conditions.where(identifier: identifier).exists?
+          errors.add(:identifier, :taken)
+        end
+      end
+
+      def method_missing(method_name, *args, &block)
+        if config.key?(method_name.to_s)
+          config[method_name.to_s]
+        else
+          super
         end
       end
     end

@@ -39,6 +39,9 @@ module Para
     mattr_accessor :defaults
     @@defaults = nil
 
+    mattr_accessor :generate_hreflang_tags
+    @@generate_hreflang_tags = false
+
     def self.configure
       block_given? ? yield(self) : self
     end

@@ -3,6 +3,7 @@ module Para
     module MetaTags
       class Store
         attr_reader :controller, :defaults
+        attr_accessor :page
 
         TAGS = :title, :description, :image, :url, :site_name, :keywords, :type,
                :site, :card, :charset, :canonical

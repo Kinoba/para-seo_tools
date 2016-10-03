@@ -289,14 +289,14 @@ APP_DOMAIN="www.mydomain.com"
 Generating the sitemap can be done with the dedicated rake task :
 
 ```bash
-rake seo_tools:sitemap:generate
+rake para:seo_tools:sitemap:generate
 ```
 
 You can pass a `LOCATION` environment variable to define where to store it.
 By default, it will be stored at : `public/sitemap.xml`
 
 ```bash
-rake seo_tools:sitemap:generate LOCATION=/home/user/apps/my-app/shared
+rake para:seo_tools:sitemap:generate LOCATION=/home/user/apps/my-app/shared
 ```
 
 ### 4. Retrieving meta tags in your app

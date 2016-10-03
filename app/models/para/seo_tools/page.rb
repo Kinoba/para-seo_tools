@@ -10,8 +10,10 @@ module Para
 
       validate :identifier_uniqueness
 
-      scope :with_subdomain, ->(subdomain) { where("config->>'subdomain' = ?", subdomain) }
-      scope :with_domain, ->(domain) { where("config->>'domain' = ?", domain) }
+      scope :with_subdomain, ->(subdomain) { scope_with(subdomain: subdomain) }
+      scope :with_domain, ->(domain) { scope_with(domain: domain) }
+
+      scope :scope_with, -> (attributes) { PageScoping.scope_with(self, attributes) }
 
       def meta_tag(name)
         if (value = send(name).presence) && (meta = process(name, value)).present?
@@ -61,7 +63,11 @@ module Para
         end
       end
 
-      def sitemap_host
+      def url
+        @url ||= ['//', host, path].join
+      end
+
+      def host
         host = []
         host << config['subdomain'] if Para::SeoTools.handle_subdomain
 
@@ -72,6 +78,10 @@ module Para
         end
 
         host.join('.')
+      end
+
+      def siblings
+        self.class.where(identifier: identifier).where.not(id: id)
       end
 
       private

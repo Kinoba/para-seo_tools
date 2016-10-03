@@ -21,6 +21,8 @@ module Para
 
       def set_meta_tags_from_page(page)
         if page.kind_of?(Para::SeoTools::Page)
+          meta_tags_store.page = page
+
           Para::SeoTools::Page::META_TAGS.each do |tag_name|
             if (value = page.meta_tag(tag_name)).present?
               set_meta_tag(tag_name, value)

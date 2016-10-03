@@ -14,15 +14,26 @@ module Para
         resource.scope.present?
       end
 
-      def column?(attribute)
-        resource.class.column_names.include?(attribute.to_s)
-      end
-
       def uniqueness_scope_conditions
         return resource.class unless scoped?
 
-        resource.scope_attributes.reduce(resource.class) do |query, (attribute, value)|
-          if column?(attribute)
+        self.class.scope_with(resource.class, resource.scope_attributes)
+      end
+
+      def unique_identifier
+        return resource.identifier unless scoped?
+
+        resource.scope_attributes.merge(identifier: resource.identifier).to_json
+      end
+
+      def alternate_language_siblings
+        attributes = resource.scope_attributes.reject { |attribute, _| attribute == 'locale' }
+        self.class.scope_with(resource.siblings, attributes)
+      end
+
+      def self.scope_with(resource_class, attributes)
+        attributes.reduce(resource_class) do |query, (attribute, value)|
+          if column?(resource_class, attribute)
             query.where(attribute => value)
           else
             query.where("config->>'#{ attribute }' = ?", value)
@@ -30,9 +41,8 @@ module Para
         end
       end
 
-      def unique_identifier
-        return resource.identifier unless scoped?
-        resource.scope_attributes.merge(identifier: resource.identifier).to_json
+      def self.column?(resource_class, attribute)
+        resource_class.column_names.include?(attribute.to_s)
       end
     end
   end

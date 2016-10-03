@@ -17,7 +17,7 @@ module Para
       def self.build
         ::Sitemap::Generator.instance.load do
           Para::SeoTools::Page.find_each do |page|
-            literal page.path, host: page.sitemap_host
+            literal page.path, host: page.host
           end
         end
       end

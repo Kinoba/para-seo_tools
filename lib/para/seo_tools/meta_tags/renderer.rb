@@ -2,7 +2,7 @@ module Para
   module SeoTools
     module MetaTags
       class Renderer
-        LINE_SEPARATOR = "\n"
+        LINE_SEPARATOR = "\n    "
 
         attr_reader :template, :vendors
 
@@ -20,8 +20,9 @@ module Para
             description_tag,
             keywords_tag,
             canonical_tag,
-            vendor_tags
-          ].compact.join(LINE_SEPARATOR).html_safe
+            vendor_tags,
+            hreflang_tags
+          ].flatten.compact.join(LINE_SEPARATOR).html_safe
         end
 
         private
@@ -68,7 +69,16 @@ module Para
             end
           end
 
-          vendor_tags.join(LINE_SEPARATOR)
+          vendor_tags
+        end
+
+        def hreflang_tags
+          return unless Para::SeoTools.generate_hreflang_tags
+          return unless meta_tags.page
+
+          SeoTools::PageScoping.new(meta_tags.page).alternate_language_siblings.map do |page|
+            tag(:link, rel: 'alternate', href: page.url, hreflang: page.locale)
+          end
         end
 
         def meta_tags

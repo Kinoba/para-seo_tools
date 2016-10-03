@@ -61,6 +61,19 @@ module Para
         end
       end
 
+      def sitemap_host
+        host = []
+        host << config['subdomain'] if Para::SeoTools.handle_subdomain
+
+        if Para::SeoTools.handle_domain
+          host << config['domain']
+        else
+          host << Para::SeoTools.host
+        end
+
+        host.join('.')
+      end
+
       private
 
       def process(name, value)

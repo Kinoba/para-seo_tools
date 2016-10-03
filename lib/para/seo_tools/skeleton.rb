@@ -31,9 +31,11 @@ module Para
         build unless lazy
       end
 
-      def self.build
+      def self.build(load_skeleton: false)
         return if migrating?
         return unless ActiveRecord::Base.connection.table_exists?(Para::SeoTools::Page.table_name)
+
+        load if load_skeleton
 
         log "   * Building app skeleton pages ..."
 

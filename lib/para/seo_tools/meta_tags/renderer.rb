@@ -2,7 +2,7 @@ module Para
   module SeoTools
     module MetaTags
       class Renderer
-        LINE_SEPARATOR = "\n    "
+        LINE_SEPARATOR = "\n"
 
         attr_reader :template, :vendors
 

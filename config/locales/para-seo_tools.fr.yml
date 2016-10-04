@@ -13,12 +13,14 @@ fr:
       para/seo_tools/skeleton/job:
         progressing: "Le plan du site est actuellement recalculé, merci de patienter quelques instants ..."
         success: "Le plan du site a bien été mis à jour !"
-
+      para/seo_tools/sitemap_pinger:
+        progressing: "Le plan du site est actuellement envoyé aux différents moteurs de recherche ..."
+        success: "Le plan du site a bien été transmis aux moteurs de recherche !"
 
   activemodel:
     models:
-      para/seo_tools/skeleton/job:
-        one: "Mise à jour du plan du site"
+      para/seo_tools/skeleton/job: "Mise à jour du plan du site"
+      para/seo_tools/sitemap_pinger: "Envoi du sitemap"
 
   activerecord:
     attributes:

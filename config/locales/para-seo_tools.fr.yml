@@ -6,6 +6,7 @@ fr:
         default_meta_tag_value: "Valeur par défaut : <b>%{value}</b>"
         additional_meta_tags: "Meta-données avancées"
         refresh_skeleton: "Mettre à jour"
+        ping_search_engines: "Envoyer le sitemap aux moteurs de recherche"
         choose_locale: "Choisissez une langue"
 
     jobs:

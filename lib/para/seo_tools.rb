@@ -1,4 +1,4 @@
-require 'sitemap'
+require 'sitemap_generator'
 require 'para'
 
 require 'para/seo_tools/engine'
@@ -12,6 +12,7 @@ module Para
     autoload :Routes
     autoload :Skeleton
     autoload :Sitemap
+    autoload :SitemapPinger
     autoload :PageScoping
 
     autoload :MetaTaggable
@@ -19,13 +20,19 @@ module Para
     autoload :ViewHelpers
 
     mattr_writer :host
-    @@host = ENV['APP_DOMAIN']
+    @@host = nil
+
+    mattr_accessor :protocol
+    @@protocol = :http
 
     mattr_accessor :handle_domain
     @@handle_domain = false
 
     mattr_accessor :handle_subdomain
     @@handle_subdomain = false
+
+    mattr_accessor :default_subdomain
+    @@default_subdomain = nil
 
     mattr_accessor :title_methods
     @@title_methods = %w(title name)
@@ -51,7 +58,12 @@ module Para
     end
 
     def self.host
-      @@host.presence && @@host.match(/[^:]+/)[0]
+      @@host ||= ENV['APP_DOMAIN']
+    end
+
+    def self.full_host
+      host = [Para::SeoTools.default_subdomain, Para::SeoTools.host].compact.join(',')
+      [Para::SeoTools.protocol, host].join('://')
     end
   end
 end

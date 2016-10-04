@@ -268,8 +268,8 @@ Then go to the admin panel, and click the **Sitemap** menu link.
 ### 3. Generate a sitemap.xml
 
 Sitemap generation is accomplished through the use of the
-[rails-sitemap](https://github.com/viseztrance/rails-sitemap) gem,
-with a custom task to integrate easily with `seo_tools-para`.
+[Sitemap Generator](https://github.com/kjvarga/sitemap_generator) gem,
+with a custom task and interface to integrate easily with `seo_tools-para`.
 
 You'll first need to configure your application's host name.
 This can be defined in the generated initializer or in an environment variable.
@@ -277,7 +277,7 @@ This can be defined in the generated initializer or in an environment variable.
 In the `config/initializers/seo_tools.rb` initializer :
 
 ```ruby
-config.host = "www.mydomain.com"
+config.host = 'www.mydomain.com'
 ```
 
 Or with the `APP_DOMAIN` environment variable.
@@ -286,18 +286,23 @@ Or with the `APP_DOMAIN` environment variable.
 APP_DOMAIN="www.mydomain.com"
 ```
 
+If you want to handle subdomains you need to set the `host` without a subdomain
+and the `default_subdomain` configs together :
+
+```ruby
+config.host = 'mydomain.com'
+config.default_subdomain = 'www'
+```
+
 Generating the sitemap can be done with the dedicated rake task :
 
 ```bash
 rake para:seo_tools:sitemap:generate
 ```
 
-You can pass a `LOCATION` environment variable to define where to store it.
-By default, it will be stored at : `public/sitemap.xml`
-
-```bash
-rake para:seo_tools:sitemap:generate LOCATION=/home/user/apps/my-app/shared
-```
+For more customization informations, please read the
+[Sitemap Generator](https://github.com/kjvarga/sitemap_generator) gem
+documentation.
 
 ### 4. Retrieving meta tags in your app
 

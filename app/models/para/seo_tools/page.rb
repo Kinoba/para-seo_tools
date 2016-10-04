@@ -64,12 +64,19 @@ module Para
       end
 
       def url
-        @url ||= ['//', host, path].join
+        @url ||= [host, path].join
       end
 
       def host
         host = []
-        host << config['subdomain'] if Para::SeoTools.handle_subdomain
+
+        if Para::SeoTools.handle_subdomain
+          if (subdomain = config['subdomain'])
+            host << subdomain
+          else
+            host << Para::SeoTools.default_domain
+          end
+        end
 
         if Para::SeoTools.handle_domain
           host << config['domain']
@@ -77,7 +84,9 @@ module Para
           host << Para::SeoTools.host
         end
 
-        host.join('.')
+        host.compact.join('.')
+
+        [Para::SeoTools.protocol, host].join('://')
       end
 
       def siblings

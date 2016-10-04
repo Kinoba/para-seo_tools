@@ -4,7 +4,11 @@ module Para
       class SkeletonRefreshesController < ::Para::Admin::JobsController
         def run
           job = Para::SeoTools::Skeleton::Job.perform_later
+          track_job(job)
+        end
 
+        def ping
+          job = Para::SeoTools::SitemapPinger.perform_later
           track_job(job)
         end
       end

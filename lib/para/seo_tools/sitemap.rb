@@ -2,22 +2,11 @@ module Para
   module SeoTools
     class Sitemap
       def self.generate!
-        build
-        ::Sitemap::Generator.instance.build!
-        ::Sitemap::Generator.instance.save(path)
-      end
+        SitemapGenerator::Sitemap.default_host = Para::SeoTools.full_host
 
-      def self.path
-        @path ||= begin
-          root = ::Sitemap.configuration.save_path || ENV["LOCATION"] || Rails.public_path
-          File.join(root, "sitemap.xml")
-        end
-      end
-
-      def self.build
-        ::Sitemap::Generator.instance.load do
+        SitemapGenerator::Sitemap.create do
           Para::SeoTools::Page.find_each do |page|
-            literal page.path, host: page.host
+            add page.path, host: page.host
           end
         end
       end

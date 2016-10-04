@@ -3,9 +3,8 @@ module Para
     module Skeleton
       class Job < Para::Job::Base
         def perform
-          Para::SeoTools::Skeleton.with_logging do
-            Para::SeoTools::Skeleton.build(load_skeleton: true)
-          end
+          Para::SeoTools::Skeleton.build(load_skeleton: true)
+          Para::SeoTools::Sitemap.generate!
         end
 
         private

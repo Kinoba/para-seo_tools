@@ -8,6 +8,7 @@ module Para
           namespace :admin do
             resource :skeleton_refresh, only: [:show] do
               get 'run'
+              get 'ping'
             end
           end
         end

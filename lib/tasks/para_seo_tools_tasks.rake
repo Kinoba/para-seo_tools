@@ -15,7 +15,7 @@ namespace :para do
 
       desc "Ping engines."
       task ping: :environment do
-        ::Sitemap::Ping.send_request(Para::SeoTools::Sitemap.path)
+        SitemapGenerator::Sitemap.ping_search_engines
       end
     end
   end

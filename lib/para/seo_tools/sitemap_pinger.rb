@@ -4,12 +4,6 @@ module Para
       def perform
         Para::SeoTools::Sitemap.ping_search_engines
       end
-
-      private
-
-      def progress_total
-        nil
-      end
     end
   end
 end

@@ -49,6 +49,9 @@ module Para
     mattr_accessor :generate_hreflang_tags
     @@generate_hreflang_tags = false
 
+    mattr_accessor :sitemaps_path
+    @@sitemaps_path = 'system/'
+
     def self.configure
       block_given? ? yield(self) : self
     end

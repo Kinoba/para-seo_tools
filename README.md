@@ -294,11 +294,17 @@ config.host = 'mydomain.com'
 config.default_subdomain = 'www'
 ```
 
-Generating the sitemap can be done with the dedicated rake task :
+Generating the sitemap can be done with the dedicated rake task, or through
+the Seo Tools admin panel by refreshing it manually :
 
 ```bash
 rake para:seo_tools:sitemap:generate
 ```
+
+This will generate the sitemap at `public/system/sitemap.xml.gz`. If you
+need to change that path, you can use the `sitemaps_path` configuration, which
+allows you to choose a `public/` subdirectory as the target folder for the
+generated sitemaps.
 
 For more customization informations, please read the
 [Sitemap Generator](https://github.com/kjvarga/sitemap_generator) gem

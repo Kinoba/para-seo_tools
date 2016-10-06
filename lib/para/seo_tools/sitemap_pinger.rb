@@ -2,8 +2,7 @@ module Para
   module SeoTools
     class SitemapPinger < Para::Job::Base
       def perform
-        SitemapGenerator::Sitemap.default_host = Para::SeoTools.full_host
-        SitemapGenerator::Sitemap.ping_search_engines
+        Para::SeoTools::Sitemap.ping_search_engines
       end
 
       private

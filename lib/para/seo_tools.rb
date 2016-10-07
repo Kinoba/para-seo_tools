@@ -17,7 +17,7 @@ module Para
 
     autoload :MetaTaggable
     autoload :MetaTaggableMacro
-    autoload :ViewHelpers
+    autoload :Helpers
 
     mattr_writer :host
     @@host = nil

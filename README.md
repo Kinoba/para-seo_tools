@@ -196,6 +196,27 @@ Para::SeoTools::Skeleton.draw(scope: :locale) do
 By using `I18n.with_locale`, we force the current locale in the block, and
 SeoTools automatically assigns the locale to the page resource.
 
+#### Scoping page fetching in request
+
+When you add arbitrary scope your pages, you may want Seo Tools to use these
+scopes when retrieving the page to fetch meta tags, at request time.
+
+> **Note**:  The following scopes are included in default page retrieval scoping
+and need not to be overriden : `:locale`, `:subdomain` and `:domain`.
+
+Override the `#seo_tools_scope_for(request)` method in the controllers that need
+to apply these scope rules. This will be the ApplicationController in most
+cases. The method should return a hash.
+
+```
+def seo_tools_scope_for(request)
+  super.tap do |hash|
+    # use `hash[:my_scope_name] = ...` here to fill or update the default scope
+  end
+end
+```
+
+
 #### Lazy skeleton building.
 
 On large applications, building the skeleton with all its pages at application

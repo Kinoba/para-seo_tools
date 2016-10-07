@@ -39,12 +39,8 @@ module Para
       end
 
       def fetch_meta_tags_page
-        page_conditions = Para::SeoTools::Page.where(path: request.path)
-        page_conditions = page_conditions.with_subdomain(request.subdomain) if Para::SeoTools.handle_subdomain
-        page_conditions = page_conditions.with_domain(request.domain) if Para::SeoTools.handle_domain
-
-        if (page = page_conditions.first)
-          set_meta_tags_from_page(page)
+        if current_seo_tools_page
+          set_meta_tags_from_page(current_seo_tools_page)
         end
       end
 

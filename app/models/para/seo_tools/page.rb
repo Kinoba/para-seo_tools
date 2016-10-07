@@ -84,7 +84,7 @@ module Para
           host << Para::SeoTools.host
         end
 
-        host.compact.join('.')
+        host = host.compact.join('.')
 
         [Para::SeoTools.protocol, host].join('://')
       end

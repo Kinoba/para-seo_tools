@@ -1,25 +1,18 @@
 = search_form_for @q, builder: SimpleForm::FormBuilder, url: @component.path, html: { data: { :'filters-form' => true } } do |form|
-  - if @available_locales.length > 1
-    .row
-      .col-md-3
-        = form.input_field :locale_eq, as: :selectize, collection: @available_locales, class: 'form-control', placeholder: t('para.seo_tools.pages.choose_locale')
-
-      .col-md-7
-        .input-group
-          %span.input-group-addon
-            %i.fa.fa-search
-
-          = form.input_field :identifier_or_path_or_title_or_description_or_keywords_or_canonical_cont, as: :string, placeholder: t('para.shared.search'), class: 'form-control'
-
-      .col-md-2
-        = form.submit t('para.shared.search'), class: 'btn btn-default btn-block'
-
-  - else
-    .input-group
-      %span.input-group-addon
-        %i.fa.fa-search
-
-      = form.input_field :identifier_or_path_or_title_or_description_or_keywords_or_canonical_cont, as: :string, placeholder: t('para.shared.search'), class: 'form-control'
-
-      %span.input-group-btn
-        = form.submit t('para.shared.search'), class: 'btn btn-default'
+  %table
+    %tbody
+      %tr
+        - if Para::SeoTools.handle_subdomain
+          %td{ width: '15%', style: 'padding-right: 10px;' }
+            = form.input_field :subdomain_eq, as: :selectize, collection: Para::SeoTools::Page.available_subdomains, class: 'form-control', placeholder: t('para.seo_tools.pages.subdomain')
+        - if @available_locales.length > 1
+          %td{ width: '15%', style: 'padding-right: 10px;' }
+            = form.input_field :locale_eq, as: :selectize, collection: @available_locales, class: 'form-control', placeholder: t('para.seo_tools.pages.choose_locale')
+        %td{ width: '80%' }
+          .col-sm-12
+            .input-group
+              %span.input-group-addon
+                %i.fa.fa-search
+              = form.input_field :identifier_or_path_or_title_or_description_or_keywords_or_canonical_cont, as: :string, placeholder: t('para.shared.search'), class: 'form-control'
+        %td{ width: '20%' }
+          = form.submit t('para.shared.search'), class: 'btn btn-default btn-block'

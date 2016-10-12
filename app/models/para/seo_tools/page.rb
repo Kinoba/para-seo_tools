@@ -53,6 +53,12 @@ module Para
         Arel::Nodes::SqlLiteral.new(expr.to_sql)
       end
 
+      ransacker :subdomain do |parent|
+        expr = Arel::Nodes::InfixOperation.new('->>', parent.table[:config], Arel::Nodes.build_quoted('subdomain'))
+
+        Arel::Nodes::SqlLiteral.new(expr.to_sql)
+      end
+
       def scope_attributes
         scope.each_with_object({}) do |attribute, hash|
           hash[attribute] = if self.class.column_names.include?(attribute.to_s)
@@ -109,6 +115,12 @@ module Para
 
         if conditions.where(identifier: identifier).exists?
           errors.add(:identifier, :taken)
+        end
+      end
+
+      def self.available_subdomains
+        select("DISTINCT(config->>'subdomain') AS subdomain").map do |page| 
+          page.read_attribute(:subdomain) 
         end
       end
 

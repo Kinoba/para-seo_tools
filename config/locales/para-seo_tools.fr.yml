@@ -8,6 +8,7 @@ fr:
         refresh_skeleton: "Mettre à jour"
         ping_search_engines: "Envoyer le sitemap aux moteurs de recherche"
         choose_locale: "Choisissez une langue"
+        subdomain: Sous-domaine
 
     jobs:
       para/seo_tools/skeleton/job:
@@ -33,4 +34,5 @@ fr:
         image: "Image pour le partage sur les réseaux sociaux"
         canonical: "URL canonique"
         locale: "Langue"
+        subdomain: "Sous-domaine"
 

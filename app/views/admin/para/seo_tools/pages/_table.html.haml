@@ -1,5 +1,6 @@
 = resources_table(model: model, component: component, actions: false) do |table|
   = table.header do
+    = table.header_for(:subdomain, sort: :subdomain) if Para::SeoTools.handle_subdomain
     = table.header_for(:path)
     = table.header_for(:title)
     = table.header_for(:description)
@@ -7,6 +8,7 @@
     %th
 
   = table.rows(resources) do |resource|
+    = table.data_for(resource.subdomain) if Para::SeoTools.handle_subdomain
     = table.data_for(resource, :path)
     = table.data_for(resource.meta_tag(:title))
     = table.data_for(resource.meta_tag(:description))

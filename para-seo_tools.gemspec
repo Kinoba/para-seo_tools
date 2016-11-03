@@ -22,6 +22,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sitemap_generator'
   spec.add_dependency 'request_store'
 
+  # Search console API usage and authentication
+  spec.add_dependency 'httparty'
+  spec.add_dependency 'google-api-client'
+
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
 end

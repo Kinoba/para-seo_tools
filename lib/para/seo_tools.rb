@@ -1,6 +1,9 @@
 require 'sitemap_generator'
 require 'para'
 
+require 'httparty'
+require 'google/apis/webmasters_v3'
+
 require 'para/seo_tools/engine'
 
 module Para
@@ -14,6 +17,9 @@ module Para
     autoload :Sitemap
     autoload :SitemapPinger
     autoload :PageScoping
+
+    # Google Search Console data management
+    autoload :SearchConsole
 
     autoload :MetaTaggable
     autoload :MetaTaggableMacro

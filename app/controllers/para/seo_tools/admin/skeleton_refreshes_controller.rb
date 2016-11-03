@@ -11,6 +11,11 @@ module Para
           job = Para::SeoTools::SitemapPinger.perform_later
           track_job(job)
         end
+
+        def search_console
+          job = Para::SeoTools::SearchConsole::RefreshJob.perform_later
+          track_job(job)
+        end
       end
     end
   end

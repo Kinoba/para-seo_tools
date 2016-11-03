@@ -7,6 +7,7 @@ fr:
         additional_meta_tags: "Meta-données avancées"
         refresh_skeleton: "Mettre à jour"
         ping_search_engines: "Envoyer le sitemap aux moteurs de recherche"
+        refresh_search_data: "Mettre à la jour les statistiques de recherche"
         choose_locale: "Choisissez une langue"
 
     jobs:

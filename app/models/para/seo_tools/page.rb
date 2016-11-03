@@ -8,6 +8,9 @@ module Para
       has_attached_file :image, styles: { thumb: '200x200#' }
       validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ }
 
+      has_many :search_analytics_rows, dependent: :destroy,
+                                       class_name: 'Para::SeoTools::PageSearchAnalyticsRow'
+
       validate :identifier_uniqueness
 
       scope :with_subdomain, ->(subdomain) { scope_with(subdomain: subdomain) }

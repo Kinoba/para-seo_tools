@@ -6,9 +6,12 @@ module Para
           crud_component :seo_tools_skeleton, scope: ':model', controller: :skeleton_resources
 
           namespace :admin do
-            resource :skeleton_refresh, only: [:show] do
-              get 'run'
-              get 'ping'
+            scope 'seo_tools' do
+              resource :skeleton_refresh, only: [:show] do
+                get 'run'
+                get 'ping'
+                get 'search_console'
+              end
             end
           end
         end

@@ -52,6 +52,9 @@ module Para
     mattr_accessor :sitemaps_path
     @@sitemaps_path = 'system/'
 
+    mattr_accessor :sitemap_path_regexp
+    @@sitemap_path_regexp = '.*'
+
     def self.configure
       block_given? ? yield(self) : self
     end

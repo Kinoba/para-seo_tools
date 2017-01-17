@@ -10,7 +10,7 @@ module Para
         prepare
 
         SitemapGenerator::Sitemap.create do
-          Para::SeoTools::Page.find_each do |page|
+          Para::SeoTools::Page.where('path ~* ?', Para::SeoTools.sitemap_path_regexp).find_each do |page|
             add page.path, host: page.host
           end
         end

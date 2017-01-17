@@ -5,6 +5,12 @@ Para::SeoTools.configure do |config|
   #
   # config.host = ENV['APP_DOMAIN']
 
+  # Set a regexp to filter path from skeleton
+  #
+  # Defaults to '.*', matching all path
+  #
+  # config.sitemap_path_regexp = '.*'
+
   # Default title methods to be checked for title
   #
   # config.title_methods = %w(title name)

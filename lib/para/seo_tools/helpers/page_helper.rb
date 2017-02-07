@@ -18,7 +18,7 @@ module Para
 
         def current_seo_tools_page
           RequestStore.store['para.seo_tools.current_seo_tools_page'] ||=
-            seo_tools_page_for({ path: request.path }.merge(seo_tools_scope_for(request)))
+            seo_tools_page_for({ path: request.path }.reverse_merge(seo_tools_scope_for(request)))
         end
 
         # Retrieve the first page that matches the given scope conditions
@@ -48,7 +48,7 @@ module Para
 
           return Para::SeoTools::Page.none unless source_page
 
-          scope_hash = scope_hash.merge(seo_tools_scope_for(request))
+          scope_hash = scope_hash.reverse_merge(seo_tools_scope_for(request))
           source_page.siblings.scope_with(scope_hash)
         end
 

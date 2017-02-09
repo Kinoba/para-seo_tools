@@ -29,7 +29,7 @@ gem install seo_tools-para
 Run the installation generator :
 
 ```bash
-rails generate seo_tools:install
+rails generate para:seo_tools:install
 ```
 
 ## Usage
@@ -48,7 +48,7 @@ In the following section, you'll find how to :
 
 ### 1. Define the sitemap
 
-When you run the `seo_tools:install` generator, a file is created at
+When you run the `para:seo_tools:install` generator, a file is created at
 `config/skeleton.rb` for you to create the sitemap.
 
 This file allows you to define which pages you want to make available for
@@ -233,7 +233,7 @@ end
 Then use the following rake task :
 
 ```bash
-rake seo_tools:skeleton:build
+rake para:seo_tools:skeleton:build
 ```
 
 #### Domain and subdomains handling

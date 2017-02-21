@@ -11,7 +11,7 @@ for filling out all the pages' meta tags.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'seo_tools-para'
+gem 'para-seo_tools'
 ```
 
 And then execute:

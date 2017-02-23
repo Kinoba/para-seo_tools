@@ -5,7 +5,7 @@
     = table.header_for(:title)
     = table.header_for(:description)
     = table.header_for(:locale) if @available_locales.length > 1
-    %th
+    %th.table-row-actions
 
   = table.rows(resources) do |resource|
     = table.data_for(resource.subdomain) if Para::SeoTools.handle_subdomain
@@ -14,9 +14,8 @@
     = table.data_for(resource.meta_tag(:description))
     = table.data_for(resource, :locale) if @available_locales.length > 1
 
-    %td
-      .pull-right.btn-group
-        = table.edit_button(resource)
+    %td.table-row-actions
+      = table.edit_button(resource)
 
-        = link_to resource.path, target: '_blank', class: 'btn btn-default hint--left', data: { hint: t('para.seo_tools.pages.see_in_app') } do
-          = fa_icon 'eye'
+      = link_to resource.path, target: '_blank', class: 'btn btn-sm btn-icon-default btn-shadow hint--left', data: { hint: t('para.seo_tools.pages.see_in_app') } do
+        = fa_icon 'eye'

@@ -1,10 +1,10 @@
-%ul.panel-controls
+%ul.actions-control
   %li
-    = link_to run_admin_skeleton_refresh_path, class: 'btn btn-default', remote: true, data: { :'job-tracker-button' => true } do
+    = link_to run_admin_skeleton_refresh_path, class: 'btn btn-default btn-shadow', remote: true, data: { :'job-tracker-button' => true } do
       = fa_icon 'refresh'
       = t('para.seo_tools.pages.refresh_skeleton')
 
   %li
-    = link_to ping_admin_skeleton_refresh_path, class: 'btn btn-default', remote: true, data: { :'job-tracker-button' => true } do
+    = link_to ping_admin_skeleton_refresh_path, class: 'btn btn-default btn-shadow', remote: true, data: { :'job-tracker-button' => true } do
       = fa_icon 'cloud-upload'
       = t('para.seo_tools.pages.ping_search_engines')

@@ -17,5 +17,5 @@
     %td.table-row-actions
       = table.edit_button(resource)
 
-      = link_to resource.path, target: '_blank', class: 'btn btn-sm btn-icon-default btn-shadow hint--left', data: { hint: t('para.seo_tools.pages.see_in_app') } do
+      = link_to resource.path, target: '_blank', class: 'btn btn-sm btn-icon-default btn-shadow hint--left', aria: { label: t('para.seo_tools.pages.see_in_app') } do
         = fa_icon 'eye'

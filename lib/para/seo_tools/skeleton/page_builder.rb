@@ -58,6 +58,7 @@ module Para
             # Override path (i.e.: slug changed)
             page.path = path if path.to_s != page.path
             page.locale = locale
+
             # Do not override meta tags if already present
             page.defaults = defaults
             page.config = config

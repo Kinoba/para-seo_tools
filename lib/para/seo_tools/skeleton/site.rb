@@ -10,7 +10,7 @@ module Para
           @default_page_options = options
         end
 
-        def page(name, options = {} , &block)
+        def page(name, options = {}, &block)
           options.reverse_merge!(default_page_options)
 
           Skeleton::PageBuilder.new(name, options).tap do |page|

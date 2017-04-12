@@ -10,8 +10,11 @@ module Para
         prepare
 
         SitemapGenerator::Sitemap.create do
-          Para::SeoTools::Page.where('path ~* ?', Para::SeoTools.sitemap_path_regexp).find_each do |page|
-            add page.path, host: page.host
+          Para::SeoTools::Page.where(
+            "path ~* ? AND CAST(config->>'noindex' AS boolean) != ?",
+            Para::SeoTools.sitemap_path_regexp, true
+          ).find_each do |page|
+            add(page.path, host: page.host) unless page.config['noindex']
           end
         end
       end

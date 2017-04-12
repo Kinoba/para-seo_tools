@@ -21,7 +21,8 @@ module Para
             keywords_tag,
             canonical_tag,
             vendor_tags,
-            hreflang_tags
+            hreflang_tags,
+            index_tags
           ].flatten.compact.join(LINE_SEPARATOR).html_safe
         end
 
@@ -78,6 +79,19 @@ module Para
 
           SeoTools::PageScoping.new(meta_tags.page).alternate_language_siblings.map do |page|
             tag(:link, rel: 'alternate', href: page.url, hreflang: page.locale)
+          end
+        end
+
+        def index_tags
+          noindex = !meta_tags.page || meta_tags.page.config['noindex']
+          nofollow = meta_tags.page && meta_tags.page.config['nofollow']
+
+          if noindex || nofollow
+            content = []
+            content << 'noindex' if noindex
+            content << 'nofollow' if nofollow
+
+            tag(:meta, name: 'robots', content: content.join(','))
           end
         end
 

@@ -1,13 +1,14 @@
 = para_form_for(resource) do |form|
-  = form.fieldset do
-    = form.input :path, disabled: true
+  = form.tabs do |tabs|
+    = tabs.tab :informations, icon: 'info-circle' do
+      = form.input :path, disabled: true
 
-    = meta_tag_input form, :title
-    = meta_tag_input form, :description
-    = meta_tag_input form, :keywords
+      = meta_tag_input form, :title
+      = meta_tag_input form, :description
+      = meta_tag_input form, :keywords
 
-  = form.fieldset title: t('para.seo_tools.pages.additional_meta_tags') do
-    = meta_tag_input form, :image, as: :image
-    = meta_tag_input form, :canonical
+    = tabs.tab :additional_meta_tags, icon: 'cog' do
+      = meta_tag_input form, :image, as: :image, hint: t('para.seo_tools.pages.image_hint')
+      = meta_tag_input form, :canonical, hint: t('para.seo_tools.pages.canonical_hint')
 
   = form.actions

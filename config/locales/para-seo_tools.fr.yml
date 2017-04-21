@@ -4,11 +4,16 @@ fr:
       pages:
         see_in_app: "Voir la page"
         default_meta_tag_value: "Valeur par défaut : <b>%{value}</b>"
-        additional_meta_tags: "Meta-données avancées"
         refresh_skeleton: "Mettre à jour"
         ping_search_engines: "Envoyer le sitemap aux moteurs de recherche"
         choose_locale: "Choisissez une langue"
         subdomain: Sous-domaine
+        image_hint: |
+          Cette image sera utilisée par défaut comme prévisualisation de la page
+          lors de son partage sur les réseaux sociaux.
+        canonical_hint: |
+          Si la page ne doit pas être référencée au profit d'une autre page,
+          collez ici l'adresse de la page à référencer à la place.
 
     jobs:
       para/seo_tools/skeleton/job:
@@ -17,6 +22,16 @@ fr:
       para/seo_tools/sitemap_pinger:
         progressing: "Le plan du site est actuellement envoyé aux différents moteurs de recherche ..."
         success: "Le plan du site a bien été transmis aux moteurs de recherche !"
+
+  components:
+    component:
+      sitemap: "Gestion SEO / Plan du site"
+
+  forms:
+    tabs:
+      para/seo_tools/page:
+        informations: "Informations"
+        additional_meta_tags: "Meta-données avancées"
 
   activemodel:
     models:
@@ -31,8 +46,8 @@ fr:
         title: "Titre"
         description: "Description"
         keywords: "Mots-clés de la page"
-        image: "Image pour le partage sur les réseaux sociaux"
-        canonical: "URL canonique"
+        image: "Image pour le partage"
+        canonical: "URL canonique (Canonical)"
         locale: "Langue"
         subdomain: "Sous-domaine"
 

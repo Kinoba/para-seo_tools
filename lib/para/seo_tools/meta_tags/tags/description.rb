@@ -3,9 +3,11 @@ module Para
     module MetaTags
       module Tags
         class Description < Base
+          include Para::SeoTools::Helpers::DefaultDataMethodsHelper
+
           def value
             self.class.process(
-              meta_taggable_description || instance_description || action_name
+              meta_taggable_description || resource_description || action_name
             )
           end
 
@@ -16,22 +18,12 @@ module Para
           private
 
           def meta_taggable_description
-            instance && instance.meta_tagged? &&
-              instance.meta_tags_list.meta_description.presence
+            resource && resource.meta_tagged? &&
+              resource.meta_tags_list.meta_description.presence
           end
 
-          def instance_description
-            if instance
-              Para::SeoTools.description_methods.each do |method|
-                if instance.respond_to?(method)
-                  if (description = instance.send(method).presence)
-                    return description
-                  end
-                end
-              end
-
-              return nil
-            end
+          def resource_description
+            default_description_for(resource)
           end
 
           def action_name

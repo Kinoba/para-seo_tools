@@ -5,6 +5,7 @@ module Para
 
       class PageBuilder
         include Rails.application.routes.url_helpers
+        include Para::SeoTools::Helpers::DefaultDataMethodsHelper
 
         attr_reader :name, :resource, :locale, :defaults, :config
 
@@ -60,7 +61,7 @@ module Para
             page.locale = locale
 
             # Do not override meta tags if already present
-            page.defaults = defaults
+            page.defaults = process_defaults
             page.config = config
           end
         end
@@ -73,6 +74,15 @@ module Para
           if respond_to?(:"#{ name }_path")
             send(:"#{ name }_path", resource)
           end
+        end
+
+        def process_defaults
+          return {} if defaults == false
+
+          defaults[:title] ||= default_title_for(resource)
+          defaults[:description] ||= default_description_for(resource)
+
+          defaults
         end
 
         def self.model_for(page)

@@ -34,9 +34,9 @@ module Para
             key.join(".")
           end
 
-          # TODO : Define if we'll still support instance meta tags and refactor
+          # TODO : Define if we'll still support resource meta tags and refactor
           #        accordingly
-          def instance
+          def resource
           end
 
           def model_name

@@ -3,26 +3,21 @@ module Para
     module MetaTags
       module Tags
         class Title < Base
+          include Para::SeoTools::Helpers::DefaultDataMethodsHelper
+
           def value
-            meta_taggable_title || instance_title || action_name || model_name_translation
+            meta_taggable_title || resource_title || action_name || model_name_translation
           end
 
           private
 
           def meta_taggable_title
-            instance && instance.meta_tagged? &&
-              instance.meta_tags_list.meta_title.presence
+            resource && resource.meta_tagged? &&
+              resource.meta_tags_list.meta_title.presence
           end
 
-          def instance_title
-            if instance
-              Para::SeoTools.title_methods.each do |method|
-                if instance.respond_to?(method) && (title = instance.send(method)).presence
-                  return title
-                end
-              end
-              return nil
-            end
+          def resource_title
+            default_title_for(resource)
           end
 
           def action_name

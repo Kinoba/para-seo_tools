@@ -5,6 +5,7 @@ module Para
 
       autoload :PageHelper
       autoload :ViewHelper
+      autoload :DefaultDataMethodsHelper
     end
   end
 end

@@ -4,7 +4,7 @@ module Para
       module Tags
         class Image < Base
           def value
-            self.class.process(instance_image)
+            self.class.process(resource_image)
           end
 
           def self.process(value)
@@ -23,16 +23,8 @@ module Para
 
           private
 
-          def instance_image
-            if member_action?
-              Para::SeoTools.image_methods.each do |method|
-                if instance.respond_to?(method) && instance.send(method)
-                  return instance.send(method).url
-                end
-              end
-
-              nil
-            end
+          def resource_image
+            default_image_for(resource).try(:url)
           end
 
           def self.url_from(value)

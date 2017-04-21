@@ -16,7 +16,7 @@ module Para
       protected
 
       def meta_tags_from(resource)
-        @instance = resource
+        @resource = resource
       end
 
       def set_meta_tags_from_page(page)

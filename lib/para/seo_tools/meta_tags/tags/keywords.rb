@@ -10,8 +10,8 @@ module Para
           private
 
           def meta_taggable_keywords
-            instance && instance.meta_tagged? &&
-              instance.meta_tags_list.meta_keywords.presence
+            resource && resource.meta_tagged? &&
+              resource.meta_tags_list.meta_keywords.presence
           end
         end
       end

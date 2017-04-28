@@ -19,6 +19,7 @@ fr:
       para/seo_tools/skeleton/job:
         progressing: "Le plan du site est actuellement recalculé, merci de patienter quelques instants ..."
         success: "Le plan du site a bien été mis à jour !"
+        error: "Une erreur est survenue lors de la mise à jour du plan du site."
       para/seo_tools/sitemap_pinger:
         progressing: "Le plan du site est actuellement envoyé aux différents moteurs de recherche ..."
         success: "Le plan du site a bien été transmis aux moteurs de recherche !"

@@ -79,6 +79,33 @@ Posts.find_each do |post|
 end
 ```
 
+You can use the shortcut notation :
+
+```ruby
+Posts.find_each do |post|
+  page post
+end
+```
+
+For nested resources, you should have a structure like the following, which
+would automatically generate nested resource identifier and path.
+
+With the example below, we would have an identifier of
+`category:<category_id>:post:<post_id>`, with resource the post as the
+`:resource` and an automatically calculated path of
+`category_post_path(category, post)`.
+
+This uses Rails' `#polymirphic_path` helper under the hood, which works exactly
+like the `form_for` first argument for generating paths.
+
+```ruby
+Categories.find_each do |category|
+  category.posts.find_each do |post|
+    page [category, post]
+  end
+end
+```
+
 Also, you can pass options for the sitemap generation tool.
 The options are `:priority`, `:change_frequency` which are left blank
 by default.
@@ -87,7 +114,26 @@ by default.
 page :posts, priority: 1, change_frequency: 'weekly'
 ```
 
+#### Managing indexation
+
+You can easily manage `noindex`, `nofollow` and `canonical` attributes of your
+pages by setting them in the `#page` helper as follows :
+
+```ruby
+Post.find_each do |post|
+  page post, noindex: post.archived?, nofollow: post.archived?,
+             canonical: other_path(post)
+end
+```
+
 #### Default meta tag values
+
+By default, the skeleton will try to find a default title for your page by
+trying to call one of the `title_methods` on your object, and will do the same
+for the description.
+
+You can configure which methods are called in the initializer with the
+`config.title_methods` and `config.description_methods` configurations.
 
 The `page` method allows to define default data for seo_tools to use as default
 values for the title and description meta tags.

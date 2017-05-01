@@ -3,7 +3,7 @@ module Para
     class Page < ActiveRecord::Base
       META_TAGS = :title, :description, :keywords, :image, :canonical
 
-      store_accessor :config, :scope
+      store_accessor :config, :scope, :canonical
 
       has_attached_file :image, styles: { thumb: '200x200#' }
       validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ }
@@ -119,8 +119,8 @@ module Para
       end
 
       def self.available_subdomains
-        select("DISTINCT(config->>'subdomain') AS subdomain").map do |page| 
-          page.read_attribute(:subdomain) 
+        select("DISTINCT(config->>'subdomain') AS subdomain").map do |page|
+          page.read_attribute(:subdomain)
         end
       end
 

@@ -7,10 +7,10 @@
   - if @available_locales.length > 1
     .flextable-item
       = form.input_field :locale_eq, as: :selectize, collection: @available_locales, class: 'form-control', placeholder: t('para.seo_tools.pages.choose_locale')
-      
+
   .flextable-item.flextable-primary
     .input-group.filter-form
-      = form.input_field :identifier_or_path_or_title_or_description_or_keywords_or_canonical_cont, as: :string, placeholder: t('para.shared.search'), class: 'form-control'
+      = form.input_field :identifier_or_path_or_title_or_description_or_keywords_cont, as: :string, placeholder: t('para.shared.search'), class: 'form-control'
       .input-group-btn
         %button.btn{ type: 'submit' }
           = fa_icon 'search'

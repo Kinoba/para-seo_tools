@@ -11,7 +11,14 @@ module Para
 
         SitemapGenerator::Sitemap.create do
           Para::SeoTools::Page.where(
-            "path ~* ? AND CAST(config->>'noindex' AS boolean) != ?",
+            # Allow filtering paths in sitemap with the `#sitemap_path_regexp`
+            # config in the seo tools initializer
+            "path ~* ? AND " +
+            # Do not push pages with noindex to sitemap
+            "(CAST(config->>'noindex' AS BOOLEAN) = ? OR config->>'noindex' IS NULL) AND " +
+            # Do not push pages that have a different canonical URL to sitemap
+            "(CAST(config->>'canonical' AS text) = path OR config->>'canonical' IS NULL)",
+
             Para::SeoTools.sitemap_path_regexp, true
           ).find_each do |page|
             add(page.path, host: page.host) unless page.config['noindex']

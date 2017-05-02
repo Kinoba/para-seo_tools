@@ -15,9 +15,9 @@ module Para
             # config in the seo tools initializer
             "path ~* ? AND " +
             # Do not push pages with noindex to sitemap
-            "(CAST(config->>'noindex' AS BOOLEAN) = ? OR config->>'noindex' IS NULL) AND " +
+            "(CAST(config->>'noindex' AS BOOLEAN) = ? OR (config->>'noindex') IS NULL) AND " +
             # Do not push pages that have a different canonical URL to sitemap
-            "(CAST(config->>'canonical' AS text) = path OR config->>'canonical' IS NULL)",
+            "(CAST(config->>'canonical' AS TEXT) = path OR (config->>'canonical') IS NULL)",
 
             Para::SeoTools.sitemap_path_regexp, true
           ).find_each do |page|

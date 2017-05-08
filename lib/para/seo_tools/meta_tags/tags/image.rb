@@ -3,6 +3,8 @@ module Para
     module MetaTags
       module Tags
         class Image < Base
+          include Para::SeoTools::Helpers::DefaultDataMethodsHelper
+
           def value
             self.class.process(resource_image)
           end

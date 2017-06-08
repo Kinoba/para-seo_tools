@@ -1,4 +1,4 @@
-class MoveCanonicalPathToConfigInSeoToolsPages < ActiveRecord::Migration[5.0]
+class MoveCanonicalPathToConfigInSeoToolsPages < ActiveRecord::Migration
   def up
     Para::SeoTools::Page.find_each do |page|
       if (canonical = page.read_attribute(:canonical)).present?

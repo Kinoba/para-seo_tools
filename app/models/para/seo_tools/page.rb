@@ -12,8 +12,9 @@ module Para
 
       scope :with_subdomain, ->(subdomain) { scope_with(subdomain: subdomain) }
       scope :with_domain, ->(domain) { scope_with(domain: domain) }
+      scope :with_canonical, -> { where("config->>'canonical' IS NOT NULL") }
 
-      scope :scope_with, -> (attributes) { PageScoping.scope_with(self, attributes) }
+      scope :scope_with, ->(attributes) { PageScoping.scope_with(self, attributes) }
 
       def meta_tag(name)
         if (value = send(name).presence) && (meta = process(name, value)).present?
@@ -55,6 +56,12 @@ module Para
 
       ransacker :subdomain do |parent|
         expr = Arel::Nodes::InfixOperation.new('->>', parent.table[:config], Arel::Nodes.build_quoted('subdomain'))
+
+        Arel::Nodes::SqlLiteral.new(expr.to_sql)
+      end
+
+      ransacker :canonical do |parent|
+        expr = Arel::Nodes::InfixOperation.new('->>', parent.table[:config], Arel::Nodes.build_quoted('canonical'))
 
         Arel::Nodes::SqlLiteral.new(expr.to_sql)
       end

@@ -1,5 +1,4 @@
 = search_form_for @q, builder: SimpleForm::FormBuilder, url: @component.path, html: { data: { :'filters-form' => true } } do |form|
-
   - if Para::SeoTools.handle_subdomain
     .flextable-item
       = form.input_field :subdomain_eq, as: :selectize, collection: Para::SeoTools::Page.available_subdomains, class: 'form-control', placeholder: t('para.seo_tools.pages.subdomain')
@@ -7,6 +6,12 @@
   - if @available_locales.length > 1
     .flextable-item
       = form.input_field :locale_eq, as: :selectize, collection: @available_locales, class: 'form-control', placeholder: t('para.seo_tools.pages.choose_locale')
+
+  - if Para::SeoTools::Page.with_canonical.any?
+    .flextable-item
+      %label.checkbox
+        = form.input_field :canonical_null, as: :boolean
+        = t('para.seo_tools.pages.only_show_canonicals')
 
   .flextable-item.flextable-primary
     .input-group.filter-form

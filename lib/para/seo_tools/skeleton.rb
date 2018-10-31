@@ -54,8 +54,13 @@ module Para
         end
       end
 
+      # Handle Rails 4 and 5
       def self.migrating?
-        ActiveRecord::Migrator.needs_migration?
+        if ActiveRecord::Migrator.respond_to?(:needs_migration?)
+          ActiveRecord::Migrator.needs_migration?
+        else
+          ActiveRecord::Base.connection.migration_context.needs_migration?
+        end
       end
 
       def self.destroy_deleted_pages!

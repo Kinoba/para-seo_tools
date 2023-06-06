@@ -1,5 +1,5 @@
 module Para
   module SeoTools
-    VERSION = '0.5.1'
+    VERSION = '1.1.0'
   end
 end

@@ -22,7 +22,7 @@ module Para
         # Skeleton file path
         skeleton_path = Rails.root.join('config', 'skeleton.rb')
         # Load the skeleton file
-        require skeleton_path if File.exists?(skeleton_path)
+        require skeleton_path if File.exist?(skeleton_path)
       end
 
       def self.draw(lazy: false, **options, &block)
@@ -37,7 +37,7 @@ module Para
 
         load if load_skeleton
 
-        log "   * Building app skeleton pages ..."
+        log '   * Building app skeleton pages ...'
 
         site_options = options.merge(enable_logging: enable_logging)
         self.site = Skeleton::Site.new(site_options)
@@ -60,7 +60,7 @@ module Para
 
       def self.destroy_deleted_pages!
         pages = Para::SeoTools::Page.where.not(id: site.saved_pages_ids)
-        log "   * Destroying old pages ..."
+        log '   * Destroying old pages ...'
         pages.delete_all
       end
 

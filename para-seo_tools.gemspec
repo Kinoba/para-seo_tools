@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'rails', '>= 4.0', '<= 6.1'
+  spec.add_dependency 'rails', '>= 4.0', '< 7.1'
   spec.add_dependency 'request_store'
   spec.add_dependency 'sitemap_generator'
 
